@@ -7,6 +7,7 @@ import Steps from './components/Steps';
 import Faq from './components/Faq';
 import Review from './components/Review';
 import Footer from './components/Footer';
+import ToolPage from './contents/[template-slug]/ToolPage';
 import Credentials from './components/Credentials'; 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Toast from './components/Toast';
@@ -24,7 +25,7 @@ function App() {
               <Features/>
               <Steps/>
               <Faq/>
-              <Review/>
+              {/*<Review/>*/}
               <Footer/>
             </>
           } />
@@ -34,8 +35,8 @@ function App() {
               <Credentials />
             </>
           } />
-          <Route path="/sass" element={ <Sass /> } 
-          />
+          <Route path="/sass" element={<Sass />}/>
+          <Route path="/tools/:slug" element={<ToolPage />} />
         </Routes>
       </main>
     </Router>

@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db } from './firebase';
 import { doc, getDoc } from "firebase/firestore";
-import SearchTemplate from './SearchTemplate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faHistory, faFileInvoice, faCog } from '@fortawesome/free-solid-svg-icons';
-import TemplateList from './TemplateList';
+import SassTemplate from './SassTemplate';
 const Sass = () => {
+  const [selectedTemplateSlug, setSelectedTemplateSlug] = useState(null);
   const navigate = useNavigate();
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -61,7 +61,7 @@ const Sass = () => {
 
   return (
       <div className="flex h-screen overflow-hidden">
-        <nav className="fixed top-0 z-50 w-full h-20 pt-2 shadow-lg text-gray-900">
+        <nav className="fixed top-0 z-50 w-full h-22 pt-2 shadow-sm text-gray-900">
           <div className="px-3 py-3 lg:px-5 lg:pl-3 flex items-center justify-between">
             <div className="flex items-center">
               <button type="button" onClick={toggleSidebar} aria-controls="logo-sidebar" className="inline-flex items-center p-2 text-white rounded-lg sm:hidden hover:bg-blue-500 focus:ring-2 dark:text-gray-400 dark:focus:ring-gray-600"><span className="sr-only">Open sidebar</span><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path clipRule="evenodd" fillRule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"/></svg></button>
@@ -91,33 +91,32 @@ const Sass = () => {
         </nav>
         <aside 
           id="logo-sidebar" 
-          className={`fixed top-20 left-0 z-50 w-64 h-full bg-gray-900 text-gray-100 border-r-4 border-blue-600 transform transition-transform ${
+          className={`fixed top-20 left-0 z-50 w-64 h-full text-blue-950 transform transition-transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } sm:translate-x-0`} 
-          aria-label="Sidebar"
-        >
+          aria-label="Sidebar" style={{backgroundColor:'white'}}>
           <div className="h-full px-3 pb-8 pt-8 font-poppins font-bold">
           <ul className="space-y-2 text-lg">
             <li>
-              <a href="/" className="flex items-center p-2 py-3 text-gray-100 hover:bg-violet-700 rounded-lg">
+              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
                 <FontAwesomeIcon icon={faHome} className="mr-3" />
                 Home
               </a>
             </li>
             <li>
-              <a href="/" className="flex items-center p-2 py-3 text-gray-100 hover:bg-violet-700 rounded-lg">
+              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
                 <FontAwesomeIcon icon={faHistory} className="mr-3" />
                 History
               </a>
             </li>
             <li>
-              <a href="/" className="flex items-center p-2 py-3 text-gray-100 hover:bg-violet-700 rounded-lg">
+              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
                 <FontAwesomeIcon icon={faFileInvoice} className="mr-3" />
                 Billing
               </a>
             </li>
             <li>
-              <a href="/" className="flex items-center p-2 py-3 text-gray-100 hover:bg-violet-700 rounded-lg">
+              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
                 <FontAwesomeIcon icon={faCog} className="mr-3" />
                 Settings
               </a>
@@ -125,10 +124,7 @@ const Sass = () => {
           </ul>
         </div>
         </aside>
-        <main className="flex-1 ml-0 mt-20 h-[calc(100vh-5rem)] w-full overflow-y-auto bg-gray-100 sm:ml-64">
-          <SearchTemplate onSearchInput={(val)=>setUserSearchInput(val)}/>
-          <TemplateList userSearchInput={userSearchInput}/>
-        </main>
+        <SassTemplate onSearchInput={(val)=>setUserSearchInput(val)} userSearchInput={userSearchInput}/>
       </div>
   );
 };

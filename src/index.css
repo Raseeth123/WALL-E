@@ -5,7 +5,7 @@
 
 @layer base {
     html {
-      @apply bg-black-100
+      @apply bg-gray-950
     }
   
     body {

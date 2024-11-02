@@ -8,7 +8,7 @@ const Steps = () => {
           Chat Instantly with Your AI
         </h3>
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6 w-full px-4 md:px-10 mb-6">
+      <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6 w-full px-4 md:px-10 mb-6 gap-6">
         <div className="w-full md:w-80 h-45 p-6 lg:border-t-4 max-md:border-l-4 border-s3 text-p4">
           <p className="mt-2 font-poppins text-lg caption">Step-1</p>
           <h4 className="text-xl font-semibold mb-5">Sign Up for Free</h4>
