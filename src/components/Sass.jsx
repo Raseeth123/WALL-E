@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { auth, db } from './firebase';
 import { doc, getDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faHistory, faFileInvoice, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faHomeAlt, faHistory} from '@fortawesome/free-solid-svg-icons';
+import UsageTrack from './UsageTrack';
 import SassTemplate from './SassTemplate';
+import LoadingSpinner from './LoadingSpinner';
+
 const Sass = () => {
-  const [selectedTemplateSlug, setSelectedTemplateSlug] = useState(null);
   const navigate = useNavigate();
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -21,7 +23,6 @@ const Sass = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setUserDetails(docSnap.data());
-          console.log("User data:", docSnap.data());
         } else {
           console.log("No such document!");
         }
@@ -57,10 +58,13 @@ const Sass = () => {
 
   const[userSearchInput,setUserSearchInput]=useState("");
 
-  
-
   return (
-      <div className="flex h-screen overflow-hidden">
+    <div>
+    {loading ? (
+      <LoadingSpinner />
+    ) : (userDetails?
+    (
+    <div className="flex h-screen overflow-hidden">
         <nav className="fixed top-0 z-50 w-full h-22 pt-2 shadow-sm text-gray-900">
           <div className="px-3 py-3 lg:px-5 lg:pl-3 flex items-center justify-between">
             <div className="flex items-center">
@@ -95,37 +99,31 @@ const Sass = () => {
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } sm:translate-x-0`} 
           aria-label="Sidebar" style={{backgroundColor:'white'}}>
-          <div className="h-full px-3 pb-8 pt-8 font-poppins font-bold">
+          <div className="h-full px-3 pb-8 pt-8 font-poppins font-bold relative">
           <ul className="space-y-2 text-lg">
             <li>
-              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
-                <FontAwesomeIcon icon={faHome} className="mr-3" />
+              <div onClick={()=>navigate("/")} className="flex items-center p-2 py-3 hover:bg-gradient-to-br hover:from-blue-600 hover:via-purple-900 hover:to-blue-700 hover:text-white rounded-lg transition-colors duration-200 cursor-pointer">
+                <FontAwesomeIcon icon={faHomeAlt} className="mr-3" />
                 Home
-              </a>
+              </div>
             </li>
             <li>
-              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
+              <div onClick={()=>navigate("/history")} className="flex items-center p-2 py-3 hover:bg-gradient-to-br hover:from-blue-600 hover:via-purple-900 hover:to-blue-700 hover:text-white rounded-lg transition-colors duration-200 cursor-pointer">
                 <FontAwesomeIcon icon={faHistory} className="mr-3" />
                 History
-              </a>
-            </li>
-            <li>
-              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
-                <FontAwesomeIcon icon={faFileInvoice} className="mr-3" />
-                Billing
-              </a>
-            </li>
-            <li>
-              <a href="/" className="flex items-center p-2 py-3 hover:bg-blue-500 hover:text-white rounded-lg transition-colors duration-200">
-                <FontAwesomeIcon icon={faCog} className="mr-3" />
-                Settings
-              </a>
+              </div>
             </li>
           </ul>
+          <div className='absolute bottom-100 w-full left-0'>
+            <UsageTrack/>
+          </div>
         </div>
         </aside>
         <SassTemplate onSearchInput={(val)=>setUserSearchInput(val)} userSearchInput={userSearchInput}/>
-      </div>
+      </div>): navigate('/credentials')
+     )
+      }
+    </div>
   );
 };
 

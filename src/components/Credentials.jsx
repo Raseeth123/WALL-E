@@ -96,3 +96,6 @@ const Credentials = () => {
 };
 
 export default Credentials;
+
+//https://app.leonardo.ai/_next/image?url=%2Fimg%2Flogin-hero-images%2FFemaleAdventurer4.webp&w=3840&q=75
+//https://img.freepik.com/premium-photo/space-suit-with-space-suit-it_1208742-883.jpg?semt=ais_hybrid
