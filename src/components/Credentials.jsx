@@ -16,20 +16,21 @@ const Credentials = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
+      if (!password || !confirmPassword) {
+        throw new Error("Password fields cannot be empty");
+      }
       if (password !== confirmPassword) throw new Error("Passwords do not match");
-      else if (password.length < 6) throw new Error("Password must be at least 6 Characters");
+      if (password.length < 6) throw new Error("Password must be at least 6 characters");
+  
       const userCredential = await createUserWithEmailAndPassword(auth, mail, password);
       const user = userCredential.user;
       await setDoc(doc(db, "Users", user.uid), { email: user.email, name: name });
       navigate("/sass", { replace: true });
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        toast.error("Email is already in use", { position: "top-right" });
-      } else {
-        toast.error(error.message, { position: "top-right" });
-      }
+      toast.error(error.message, { position: "top-right" });
     }
   };
+  
 
   async function googleLogin() {
     const provider = new GoogleAuthProvider();

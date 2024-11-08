@@ -76,7 +76,7 @@ const ToolPage = () => {
                 {loading ? ( 
                   <div className="animate-spin w-6 h-6 border-4 border-t-transparent rounded-full"></div>
                 ) : (
-                  <img className="w-10 h-10 rounded-full" src={ userDetails?.photoURL.length>96  && userDetails?.photoURL ? userDetails?.photoURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqafzhnwwYzuOTjTlaYMeQ7hxQLy_Wq8dnQg&s"} alt="userphoto" />
+                  <img className="w-10 h-10 rounded-full" src={ userDetails?.photoURL?.length>96  && userDetails?.photoURL ? userDetails?.photoURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqafzhnwwYzuOTjTlaYMeQ7hxQLy_Wq8dnQg&s"} alt="userphoto" />
                 )}
               </button>
               {isUserMenuOpen && (

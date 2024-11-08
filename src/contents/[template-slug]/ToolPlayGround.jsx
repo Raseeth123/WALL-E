@@ -29,6 +29,7 @@ const ToolPlayGround = ({ slug }) => {
       setAiOutput("Error generating content. Please try again.");
     } finally {
       setIsLoading(false);
+      setTotalUsage(Date.now())
     }
   }
 

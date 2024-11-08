@@ -42,18 +42,18 @@ const UsageTrack = () => {
  const getTotalUsage=()=>{
   let total=0;
   if(userTools?.length>0){
-    userTools.map((tool)=>{
+    userTools.map((tool)=>(
       tool.entries.map((entry)=>(
         total+=Number((String(tool.Output).length)*5)
       ))
-    })
+    ))
     setTotalUsage(total);
   }
  }
 
  useEffect(()=>{
    getTotalUsage()
- },[userTools,userDetails])
+ },[userTools,userDetails]);
 
   return (
     <div className='m-5'>

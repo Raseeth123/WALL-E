@@ -20,31 +20,31 @@ function App() {
   return (
     <Router>
       <TotalUsageContext.Provider value={{totalUsage,setTotalUsage}}>
-      <main className='overflow-hidden'>
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Header/>
-              <Hero/>
-              <Features/>
-              <Steps/>
-              <Faq/>
-              {/*<Review/>*/}
-              <Footer/>
-            </>
-          } />
-          <Route path="/credentials" element={
-            <>
-              <Toast />
-              <Credentials />
-            </>
-          } />
-          <Route path="/sass" element={<Sass />}/>
-          <Route path="/tools/:slug" element={<ToolPage />} />
-          <Route path="/image_generator" element={<ImageGenerator/>}/>
-          <Route path="/history" element={<History/>}/>
-        </Routes>
-      </main>
+            <main className='overflow-hidden'>
+              <Routes>
+                <Route path="/" element={
+                  <>
+                    <Header/>
+                    <Hero/>
+                    <Features/>
+                    <Steps/>
+                    <Faq/>
+                    {/*<Review/>*/}
+                    <Footer/>
+                  </>
+                } />
+                <Route path="/credentials" element={
+                  <>
+                    <Toast />
+                    <Credentials />
+                  </>
+                } />
+                <Route path="/sass" element={<Sass />}/>
+                <Route path="/tools/:slug" element={<ToolPage />} />
+                <Route path="/image_generator" element={<ImageGenerator/>}/>
+                <Route path="/history" element={<History/>}/>
+              </Routes>
+            </main>
       </TotalUsageContext.Provider>
     </Router>
   );
